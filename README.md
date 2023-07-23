@@ -1,4 +1,4 @@
-# POMODRO
+# POMODORO
 
 ### Tarefas:
 
