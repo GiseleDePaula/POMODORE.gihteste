@@ -1,4 +1,4 @@
-const milissegundosPomodoro = 4000 // Estamos usando 4 segundos para testes. 0 tempo oficial do pomodoro 25*60*1000
+const milissegundosPomodoro = 4000 // Estamos usando 4 segundos para testes. 0 tempo oficial de 25 minutos 25*60*1000
 const disparador = document.querySelector('#disparador')
 let milissegundosRestantes = milissegundosPomodoro - 1000
 let contador
