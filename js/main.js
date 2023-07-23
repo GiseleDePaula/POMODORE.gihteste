@@ -1,20 +1,26 @@
-const segundosPomodoro = 4000 // Estamos usando 4 segundos para testes. 0 tempo oficial do pomodoro 25*60*1000
+const milissegundosPomodoro = 4000 // Estamos usando 4 segundos para testes. 0 tempo oficial do pomodoro 25*60*1000
 const disparador = document.querySelector('#disparador')
+let milissegundosRestantes = milissegundosPomodoro - 1000
+let contador
 
 disparador.addEventListener('click', () => {
     console.log("Disparador ativado.")
 
-    // Criando o cronometro
-    setTimeout(() => {
-        console.log("Finalizou o Pomodoro!");
-        alert("Hora de descansar!")
+    console.log('faltam', (milissegundosPomodoro/1000))
 
-        clearInterval(contador)
-    }, segundosPomodoro)
-
-    let contador = setInterval('contadorDeSegundos()',1000);
+    contador = setInterval('contadorDeSegundos()',1000);
 })
 
 function contadorDeSegundos() {
-     console.log('tick')
-}
+    
+    if (milissegundosRestantes == 0) {
+        console.log("Finalizou o Pomodoro!");
+        alert("Hora de descansar!") 
+
+        clearInterval(contador)
+    } else {
+        console.log('faltam', milissegundosRestantes/1000)
+    }
+
+    milissegundosRestantes -= 1000;
+}  
