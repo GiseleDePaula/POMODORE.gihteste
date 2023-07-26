@@ -42,3 +42,10 @@ body {
     margin: 0 0 1rem;
     font-weight: 300;
 }
+
+.historico {
+    margin: 1rem;
+}
+.historico::before {
+    content: "#";
+}
