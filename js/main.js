@@ -26,13 +26,17 @@ function contadorDeSegundos() {
 
         if(disparador.textContent=="Começar") {
             disparador.textContent="Intervalo"
+            document.querySelector('body').style.background = "#287b7e"
+            disparador.style.color = "#287b7e"
         } else{
             disparador.textContent="Começar"
+            document.querySelector('body').style.background = "#C84949"
+            disparador.style.color = "#C84949"
         }
         
         clearInterval(contador)
     } else {
-        cronometro.textContent = formatadorDoTempo(milissegundosRestantes/1000)
+        cronometro.textContent = formatadorDoTempo(milissegundosRestantes/1000)        
     }
 
     milissegundosRestantes -= 1000;
