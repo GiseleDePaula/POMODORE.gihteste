@@ -1,9 +1,10 @@
-const milissegundosPomodoro = 4000 // Estamos usando 4 segundos para testes. 0 tempo oficial de 25 minutos 25*60*1000
-const milissegundosIntervalo = 4000 //Intervalo de 5 minutos é de 300000 ms
+const milissegundosPomodoro = 15000000 // Estamos usando 4 segundos para testes. 0 tempo oficial de 25 minutos 25*60*1000
+const milissegundosIntervaloCurto = 300000 //Intervalo de 5 minutos é de 300000 ms
 const milissegundosIntervaloLongo = 900000 //Intervalo de 5 minutos é de 300000 ms
 const disparador = document.querySelector('#disparador')
 const cronometro = document.querySelector('#cronometro')
 const historico = document.querySelector('#historico')
+const auto = document.querySelector('#auto')
 const tamanhoDoCiclo = 4
 let milissegundosRestantes = 0
 let contador
@@ -16,9 +17,11 @@ const audioFimPomodoro = new Audio("../audio/fimPomodoro.ogg")
 const audioInicioIntervalo= new Audio("../audio/inicioIntervalo.ogg")
 const audioFimIntervalo = new Audio("../audio/fimIntervalo.ogg")
 
-disparador.addEventListener('click', () => {
-    console.log("Disparador ativado.")
+disparador.addEventListener('click', disparaContador)
 
+function disparaContador() {
+    console.log("Disparador ativado.")
+    
     if(disparador.textContent=="Pausar") {
         clearInterval(contador)
         disparador.textContent="Retomar"
@@ -38,16 +41,15 @@ disparador.addEventListener('click', () => {
             if (historico.textContent % tamanhoDoCiclo ==0) {
                 milissegundosRestantes = milissegundosIntervaloLongo
             }  else {
-                milissegundosRestantes = milissegundosIntervalo
-            }
-            milissegundosRestantes -= 1000
+                milissegundosRestantes = milissegundosIntervaloCurto
+            }    
         }
 
         disparador.textContent="Pausar"
         contador = setInterval('contadorDeSegundos()',1000);
     }
 
-})
+}
 
 function contadorDeSegundos() {
     
@@ -57,6 +59,7 @@ function contadorDeSegundos() {
 
         if(modo=="pomodoro") {
             audioFimPomodoro.play()
+
             disparador.textContent="Intervalo"
             if (historico.textContent % tamanhoDoCiclo == 0) {
                 document.querySelector('body').style.background = "#29678a"
@@ -66,11 +69,15 @@ function contadorDeSegundos() {
                 disparador.style.color = "#287b7e"
             }
         } else if(modo=="intervalo"){
-            disparador.textContent="Começar"
             audioFimIntervalo.play()
-
+            
+            disparador.textContent="Começar"
             document.querySelector('body').style.background = "#C84949"
             disparador.style.color = "#C84949"
+        }
+
+        if(auto.checked) {
+            setTimeout(disparaContador, 3000)
         }
         
         clearInterval(contador)
