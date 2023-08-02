@@ -1,4 +1,4 @@
-const milissegundosPomodoro = 15000000 // Estamos usando 4 segundos para testes. 0 tempo oficial de 25 minutos 25*60*1000
+const milissegundosPomodoro = 1500000 // Estamos usando 4 segundos para testes. 0 tempo oficial de 25 minutos 25*60*1000
 const milissegundosIntervaloCurto = 300000 //Intervalo de 5 minutos é de 300000 ms
 const milissegundosIntervaloLongo = 900000 //Intervalo de 5 minutos é de 300000 ms
 const disparador = document.querySelector('#disparador')

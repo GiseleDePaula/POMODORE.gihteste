@@ -17,7 +17,7 @@
 - [X] Depois de 4 pomodoros ativar um intervalo longo de 15min
 - [X] Ter uma apresentação visual melhor para o aviso de fim do cronometro
 - [X] Adicionando avisos sonoros personalizados para cada início e fim
-- [X] Ativar função de ir no automático para a próxima etapa do pomodoro
+- [X] Ativar modo automático para o próxima etapa do pomodoro
 
 
 ### Extra:
