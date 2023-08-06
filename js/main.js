@@ -1,6 +1,6 @@
-const milissegundosPomodoro = 1500000 // Estamos usando 4 segundos para testes. 0 tempo oficial de 25 minutos 25*60*1000
-const milissegundosIntervaloCurto = 300000 //Intervalo de 5 minutos é de 300000 ms
-const milissegundosIntervaloLongo = 900000 //Intervalo de 5 minutos é de 300000 ms
+const milissegundosPomodoro = 3000 // Estamos usando 4 segundos para testes. 0 tempo oficial de 25 minutos 25*60*1000
+const milissegundosIntervaloCurto = 3000 //Intervalo de 5 minutos é de 300000 ms
+const milissegundosIntervaloLongo = 9000 //Intervalo de 5 minutos é de 300000 ms
 const disparador = document.querySelector('#disparador')
 const cronometro = document.querySelector('#cronometro')
 const historico = document.querySelector('#historico')
@@ -48,7 +48,6 @@ function disparaContador() {
         disparador.textContent="Pausar"
         contador = setInterval('contadorDeSegundos()',1000);
     }
-
 }
 
 function contadorDeSegundos() {
@@ -56,6 +55,11 @@ function contadorDeSegundos() {
     if (milissegundosRestantes == 0) {
         cronometro.textContent = "00:00"
         console.log("Hora de descansar!") 
+
+        notificacao({
+            title: 'Hora do descanso',
+            body: 'O seu tempo acabou'
+        })
 
         if(modo=="pomodoro") {
             audioFimPomodoro.play()
@@ -70,6 +74,11 @@ function contadorDeSegundos() {
             }
         } else if(modo=="intervalo"){
             audioFimIntervalo.play()
+
+            notificacao({
+                title: 'Hora do Foco',
+                body: 'Mão na massa!'
+            })
             
             disparador.textContent="Começar"
             document.querySelector('body').style.background = "#C84949"
@@ -93,3 +102,20 @@ function formatadorDoTempo (tempo) {
     const segundos = tempo % 60;
     return (minutos.toString().padStart(2, '0')+":"+segundos.toString().padStart(2, '0'))
 }
+
+// Função que cria a notificação
+function notificacao({title, body }) {
+    if (Notification.permission === 'granted') {
+        new Notification(title, { 
+            body
+        });
+    }
+}
+
+// Primeira função que será executada no script
+// Solicita permissão para mostrarnotificações no navegador se a permissão ainda não tiver sido feita
+(async () => {
+    if (Notification.permission !== 'denied'){
+        await Notification.requestPermission();
+    }
+})();
